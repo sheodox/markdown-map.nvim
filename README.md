@@ -33,3 +33,6 @@ hi markdownH4	guifg=#60adff
 hi markdownH5	guifg=#6753ff
 hi markdownH6	guifg=#a333ff
 ```
+
+![highlight customization demo](https://user-images.githubusercontent.com/3468630/161633917-913e7f83-93f7-44a1-b85f-c1b4235917ec.png)
+
