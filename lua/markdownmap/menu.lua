@@ -61,6 +61,11 @@ function M.toggle()
 	api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 	api.nvim_buf_set_option(bufnr, "modifiable", false)
 
+	for line_number, heading in ipairs(headings) do
+		-- line number is zero indexed when adding highlights, need to convert
+		api.nvim_buf_add_highlight(bufnr, -1, "markdownH" .. heading.heading_level, line_number - 1, 0, -1)
+	end
+
 	-- if they're under a header, set their cursor to the line nearest to it (above only)
 	if closest_header_line ~= nil then
 		api.nvim_win_set_cursor(0, { closest_header_line, 0 })
