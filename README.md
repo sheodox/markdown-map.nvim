@@ -1,4 +1,4 @@
-# mardown-map.nvim
+# markdown-map.nvim
 
 Navigate to headings in a markdown file with a popup table of contents.
 
