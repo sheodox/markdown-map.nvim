@@ -2,6 +2,8 @@
 
 Navigate to headings in a markdown file with a popup table of contents.
 
+https://user-images.githubusercontent.com/3468630/161474498-71af19c4-cbed-4eae-9ff2-efdb13c5a534.mp4
+
 ## Install
 
 Use your favorite plugin manager to install (requires plenary)
