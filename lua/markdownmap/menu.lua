@@ -24,6 +24,7 @@ function M.toggle()
 	end
 
 	local headings = mapper.gen_map()
+	local md_buf_cursor_line = api.nvim_win_get_cursor(0)[1]
 
 	local bufnr = vim.api.nvim_create_buf(false, false)
 	api.nvim_buf_set_option(bufnr, "bufhidden", "delete")
@@ -47,13 +48,23 @@ function M.toggle()
 	})
 
 	local lines = {}
-	for _, value in ipairs(headings) do
+	local closest_header_line = nil
+	for index, value in ipairs(headings) do
 		table.insert(lines, string.rep(" ", value.heading_level - 1) .. value.heading)
+
+		if value.line_number <= md_buf_cursor_line then
+			closest_header_line = index
+		end
 	end
 
 	api.nvim_buf_set_option(bufnr, "modifiable", true)
 	api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 	api.nvim_buf_set_option(bufnr, "modifiable", false)
+
+	-- if they're under a header, set their cursor to the line nearest to it (above only)
+	if closest_header_line ~= nil then
+		api.nvim_win_set_cursor(0, { closest_header_line, 0 })
+	end
 
 	vim.keymap.set("n", "<esc>", function()
 		M.close()
